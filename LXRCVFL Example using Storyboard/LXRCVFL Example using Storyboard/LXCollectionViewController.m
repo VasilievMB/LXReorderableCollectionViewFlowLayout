@@ -16,6 +16,12 @@
 
 #define LX_LIMITED_MOVEMENT 0
 
+@interface LXReorderableCollectionViewFlowLayout ()
+
+@property (nonatomic, readonly, strong) UIView *currentView;
+
+@end
+
 @implementation LXCollectionViewController
 
 - (void)viewDidLoad {
@@ -131,6 +137,14 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    LXReorderableCollectionViewFlowLayout *layout = (LXReorderableCollectionViewFlowLayout *)collectionViewLayout;
+    
+    layout.currentView.layer.shadowColor = [UIColor blackColor].CGColor;
+    layout.currentView.layer.shadowOffset = CGSizeMake(1, 1);
+    layout.currentView.layer.shadowRadius = 2;
+    layout.currentView.layer.shadowOpacity = 0.5;
+    
     NSLog(@"did begin drag");
 }
 
